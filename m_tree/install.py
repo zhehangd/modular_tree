@@ -48,11 +48,21 @@ def build():
     if not os.path.exists(build_dir):
         os.makedirs(build_dir)
 
-    subprocess.check_call(['cmake', "../", "-DPYBIND11_PYTHON_VERSION=3.9"], cwd=build_dir)
+    cmake_config_cmd = [
+        "cmake",
+        "..",
+        "-DPYBIND11_FINDPYTHON=ON",
+        "-DPython_ROOT_DIR={}".format(os.path.dirname(sys.executable)),
+        "--toolchain",
+        "../dependencies/vcpkg/scripts/buildsystems/vcpkg.cmake", # cwd is build
+    ]
+    cmake_build_cmd = [
+        'cmake', '--build', '.', "-j12", "--config", "Release"
+    ]
+    subprocess.check_call(cmake_config_cmd, cwd=build_dir)
     subprocess.check_call(['cmake', '--build', '.', "--config", "Release"], cwd=build_dir)
 
     print([i for i in os.listdir(os.path.join(os.path.dirname(__file__), "binaries"))])
-    
 
 if __name__ == "__main__":
     install()

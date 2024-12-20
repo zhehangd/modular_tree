@@ -1,3 +1,8 @@
+# Fork Information
+
+This is a fork of [MaximeHerpin/modular_tree](https://github.com/MaximeHerpin/modular_tree) which has not been maintained since 2022.
+It is ported to support Blender 4.2. But right now only the linux version can be built by the CI.
+
 # Mtree
 
 Mtree (previously Modular Tree) is a library for making 3d trees. It comes as an addon for blender but the c++ library can be used separately.
